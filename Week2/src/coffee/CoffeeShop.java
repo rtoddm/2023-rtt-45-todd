@@ -15,6 +15,7 @@ public class CoffeeShop {
 
 	// This private member variable can only be accessed from inside the coffeeShop
 	// class
+	//Specifying the "MenuItem" type for the List means that it will only acept objects of the "MenuItem" type
 	private List<MenuItem> menuItems = new ArrayList<>();
 
 	private List<MenuItem> cart = new ArrayList<>();
@@ -42,6 +43,8 @@ public class CoffeeShop {
 		menuItems.add(item2);
 
 		// this creates a new menu item using the constructor
+		// when using the paramaterized constructor you don't need the 'setter' bc you are passing the values in as parameters
+		// constructors don't have return statements
 		MenuItem item3 = new MenuItem("Small Cookie", 3.99, 3);
 		menuItems.add(item3);
 
@@ -65,15 +68,21 @@ public class CoffeeShop {
 			}//this is the closing bracket for the compare method
 			
 		});	//this is the closing bracket for the comparator implementation
-//	}
+		
+		//single line of code that uses a java stream to sort by price
+				//notice the :: notation in the syntax
+				//the elements in the list are of time MenuItem and we are sorting by the getPrice method/field
+				//hot to find this is to google for "java stream sort object by field"
+				menuItems.sort(Comparator.comparing(MenuItem::getPrice));
+	}
 
-//	public void printMenuItems() {
-//		System.out.println("Item Name\tPrice\tQuantity in Stock");
-//		System.out.println("---------\t------\t----------------");
-//
-//		for (MenuItem item : menuItems) {
-//			System.out.println(item.getName() + "\t" + formatPrice(item.getPrice()) + "\t" + item.getQuantityInStock());
-//		}
+	public void printMenuItems() {
+		System.out.println("Item Name\tPrice\tQuantity in Stock");
+		System.out.println("---------\t------\t----------------");
+
+		for (MenuItem item : menuItems) {
+			System.out.println(item.getName() + "\t" + formatPrice(item.getPrice()) + "\t" + item.getQuantityInStock());
+		}
 
 		System.out.println("---------\t------\t----------------\n");
 		
@@ -81,7 +90,7 @@ public class CoffeeShop {
 		//notice the :: notation in the syntax
 		//the elements in the list are of time MenuItem and we are sorting by the getPrice method/field
 		//hot to find this is to google for "java stream sort object by field"
-		menuItems.sort(Comparator.comparing(MenuItem::getPrice));
+		//menuItems.sort(Comparator.comparing(MenuItem::getPrice));
 	}
 	
 	public int menuPrompt() {
